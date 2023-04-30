@@ -2,10 +2,21 @@ let numin1 = document.getElementById('num1') as HTMLInputElement;
 let numin2 = document.getElementById('num2') as HTMLInputElement;
 let buttonele = document.querySelector('button')!;
 
-let numarr: number[] = [];
-let strarr: string[] = [];
+// let numarr: number[] = [];
+let numarr: Array<number> = [];
 
-function add(num1: number | string, num2: number | string) {
+// let strarr: string[] = [];
+let strarr: Array<string> = [];
+
+type numstr = number | string;
+// type resobj = { val: number; timestamp: Date };
+
+interface resobj {
+  val: number;
+  timestamp: Date;
+}
+
+function add(num1: numstr, num2: numstr) {
   if (typeof num1 === 'string' && typeof num2 === 'string') {
     return (num1 + ' ' + num2);
   } else if (typeof num1 === 'number' && typeof num2 === 'number') {
@@ -15,7 +26,7 @@ function add(num1: number | string, num2: number | string) {
 }
 
 
-function printResult(resultObj: { val: number; timestamp: Date }) {
+function printResult(resultObj: resobj) {
   console.log(resultObj.val)
 }
 
@@ -32,3 +43,18 @@ buttonele.addEventListener('click', () => {
   console.log(numarr, strarr)
   printResult({ val: res1 as number, timestamp: new Date() })
 })
+
+
+let myPromis = new Promise<string>((resolve, reject) => {
+  setTimeout(() => {
+    resolve('it work');
+  },1000)
+})
+
+myPromis
+  .then(res => {
+    console.log(res.split('w'))
+  })
+  .catch(err => {
+    console.log(err)
+  })
